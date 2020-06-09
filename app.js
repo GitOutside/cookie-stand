@@ -17,6 +17,14 @@ var totalCookieSales = function (){
   totalCookieListItem.textContent = ('Total: ' + cookieTotal + ' cookies');
   totalCookieList.appendChild(totalCookieListItem);
 };
+
+var calculateAllCookiesSales = function (){
+  for (var i = 0; i < openHours.length; i++){
+    var randomNumber =  getRandomIntInclusive(this.minNumCustomers, this.maxMunCustomers);
+    var hourlySales = Math.round(randomNumber * this.averageNumCookies);
+    this.dailySales.push(hourlySales);
+  }
+};
 //=====================SEATTLE============================================
 var seattleCookies = {
   name : 'Seattle',
@@ -25,6 +33,7 @@ var seattleCookies = {
   averageNumCookies : 6.3,
   dailySales : [],
   totalCookieSales : totalCookieSales,
+  calculateAllCookiesSales : calculateAllCookiesSales,
   renderToPage : function(){
     var seattleListTitle = document.getElementById('SeattleTitle');
     var newListTitle = document.createElement('p');
@@ -37,13 +46,7 @@ var seattleCookies = {
       seattleSalesByHour.appendChild(newListItem);
     }
   },
-  calculateAllCookiesSales : function(){
-    for (var i = 0; i < openHours.length; i++){
-      var randomNumber =  getRandomIntInclusive(this.minNumCustomers, this.maxMunCustomers);
-      var hourlySales = Math.round(randomNumber * this.averageNumCookies);
-      this.dailySales.push(hourlySales);
-    }
-  }
+  
 };
 seattleCookies.calculateAllCookiesSales();
 seattleCookies.renderToPage();
@@ -55,6 +58,8 @@ var x = {
 function PersonNAme (firstName) {
   this.name = firstName;
 }
+
+
 //========================================TOKYO=======================================
 var tokyoCookies = {
   name : 'Tokyo',
@@ -63,6 +68,7 @@ var tokyoCookies = {
   averageNumCookies : 1.2,
   dailySales : [],
   totalCookieSales : totalCookieSales,
+  calculateAllCookiesSales : calculateAllCookiesSales,
   renderToPage : function(){
     var tokyoListTitle = document.getElementById('TokyoTitle');
     var newListTitle = document.createElement('p');
@@ -75,17 +81,12 @@ var tokyoCookies = {
       tokyoSalesByHour.appendChild(newListItem);
     }
   },
-  calculateAllCookiesSales : function(){
-    for (var i = 0; i < openHours.length; i++){
-      var randomNumber =  getRandomIntInclusive(this.minNumCustomers, this.maxMunCustomers);
-      var hourlySales = Math.round(randomNumber * this.averageNumCookies);
-      this.dailySales.push(hourlySales);
-    }
-  }
 };
 tokyoCookies.calculateAllCookiesSales();
 tokyoCookies.renderToPage();
 tokyoCookies.totalCookieSales();
+
+
 //================================DUBAI===============================================
 var dubaiCookies = {
   name : 'Dubai',
@@ -106,13 +107,7 @@ var dubaiCookies = {
       dubaiSalesByHour.appendChild(newListItem);
     }
   },
-  calculateAllCookiesSales : function(){
-    for (var i = 0; i < openHours.length; i++){
-      var randomNumber =  getRandomIntInclusive(this.minNumCustomers, this.maxMunCustomers);
-      var hourlySales = Math.round(randomNumber * this.averageNumCookies);
-      this.dailySales.push(hourlySales);
-    }
-  }
+ calculateAllCookiesSales : calculateAllCookiesSales,
 };
 dubaiCookies.calculateAllCookiesSales();
 dubaiCookies.renderToPage();
@@ -139,13 +134,7 @@ var parisCookies = {
       parisSalesByHour.appendChild(newListItem);
     }
   },
-  calculateAllCookiesSales : function(){
-    for (var i = 0; i < openHours.length; i++){
-      var randomNumber =  getRandomIntInclusive(this.minNumCustomers, this.maxMunCustomers);
-      var hourlySales = Math.round(randomNumber * this.averageNumCookies);
-      this.dailySales.push(hourlySales);
-    }
-  }
+  calculateAllCookiesSales : calculateAllCookiesSales,
 };
 parisCookies.calculateAllCookiesSales();
 parisCookies.renderToPage();
@@ -172,13 +161,7 @@ var limaCookies = {
       limaSalesByHour.appendChild(newListItem);
     }
   },
-  calculateAllCookiesSales : function(){
-    for (var i = 0; i < openHours.length; i++){
-      var randomNumber =  getRandomIntInclusive(this.minNumCustomers, this.maxMunCustomers);
-      var hourlySales = Math.round(randomNumber * this.averageNumCookies);
-      this.dailySales.push(hourlySales);
-    }
-  }
+  calculateAllCookiesSales : calculateAllCookiesSales,
 };
 limaCookies.calculateAllCookiesSales();
 limaCookies.renderToPage();
