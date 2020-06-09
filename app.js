@@ -21,7 +21,7 @@ var totalCookieSales = function (){
 };
 var calculateAllCookiesSales = function (){
   for (var i = 0; i < openHours.length; i++){
-    var randomNumber =  getRandomIntInclusive(this.minNumCustomers, this.maxMunCustomers);
+    var randomNumber =  getRandomIntInclusive(this.minNumCustomers, this.maxNumCustomers);
     var hourlySales = Math.round(randomNumber * this.averageNumCookies);
     this.dailySales.push(hourlySales);
   }
@@ -38,11 +38,12 @@ var renderToPage = function(){
     seattleSalesByHour.appendChild(newListItem);
   }
 };
+/*
 //=====================SEATTLE============================================
 var seattleCookies = {
   name : 'Seattle',
   minNumCustomers : 23,
-  maxMunCustomers : 65,
+  maxNumCustomers : 65,
   averageNumCookies : 6.3,
   dailySales : [],
   unorderedListTitle : 'SeattleTitle',
@@ -50,23 +51,11 @@ var seattleCookies = {
   calculateAllCookiesSales : calculateAllCookiesSales,
   renderToPage : renderToPage,
 };
-seattleCookies.calculateAllCookiesSales();
-seattleCookies.renderToPage();
-seattleCookies.totalCookieSales();
-
-var x = {
-  name : 'Xavier',
-};
-function PersonNAme (firstName) {
-  this.name = firstName;
-}
-
-
 //========================================TOKYO=======================================
 var tokyoCookies = {
   name : 'Tokyo',
   minNumCustomers : 3,
-  maxMunCustomers : 24,
+  maxNumCustomers : 24,
   averageNumCookies : 1.2,
   dailySales : [],
   totalCookieSales : totalCookieSales,
@@ -74,16 +63,11 @@ var tokyoCookies = {
   unorderedListTitle : 'TokyoTitle',
   renderToPage : renderToPage,
 };
-tokyoCookies.calculateAllCookiesSales();
-tokyoCookies.renderToPage();
-tokyoCookies.totalCookieSales();
-
-
 //================================DUBAI===============================================
 var dubaiCookies = {
   name : 'Dubai',
   minNumCustomers : 11,
-  maxMunCustomers : 38,
+  maxNumCustomers : 38,
   averageNumCookies : 3.7,
   dailySales : [],
   totalCookieSales : totalCookieSales,
@@ -91,16 +75,11 @@ var dubaiCookies = {
   unorderedListTitle : 'DubaiTitle',
   renderToPage : renderToPage,
 };
-dubaiCookies.calculateAllCookiesSales();
-dubaiCookies.renderToPage();
-dubaiCookies.totalCookieSales();
-
-
 //================================PARIS================================================
 var parisCookies = {
   name : 'Paris',
   minNumCustomers : 20,
-  maxMunCustomers : 38,
+  maxNumCustomers : 38,
   averageNumCookies : 2.3,
   dailySales : [],
   totalCookieSales : totalCookieSales,
@@ -109,15 +88,11 @@ var parisCookies = {
   renderToPage : renderToPage,
 };
 parisCookies.calculateAllCookiesSales();
-parisCookies.renderToPage();
-parisCookies.totalCookieSales();
-
-
 //================================LIMA================================================
 var limaCookies = {
   name : 'Lima',
   minNumCustomers : 23,
-  maxMunCustomers : 65,
+  maxNumCustomers : 65,
   averageNumCookies : 6.3,
   dailySales : [],
   totalCookieSales : totalCookieSales,
@@ -125,6 +100,41 @@ var limaCookies = {
   unorderedListTitle : 'LimaTitle',
   renderToPage : renderToPage,
 };
+*/
+
+//=============================CONSTRUCTOR FUNCTION======================
+function CountCookies(name, minNumCustomers, maxNumCustomers, averageNumCookies, unorderedListTitle) {
+  this.name = name;
+  this.minNumCustomers = minNumCustomers;
+  this.maxNumCustomers = maxNumCustomers;
+  this.averageNumCookies = averageNumCookies;
+  this.dailySales = [];
+  this.unorderedListTitle = unorderedListTitle;
+}
+CountCookies.prototype.renderToPage = renderToPage;
+CountCookies.prototype.totalCookieSales = totalCookieSales;
+CountCookies.prototype.calculateAllCookiesSales = calculateAllCookiesSales;
+//==========================NEW OBJECTS=================================
+
+var seattleCookies = new CountCookies('Seattle', 23, 65, 6.3, 'SeattleTitle');
+var tokyoCookies = new CountCookies('Tokyo', 3, 24, 1.2, 'TokyoTitle');
+var dubaiCookies = new CountCookies('Dubai', 11, 38, 3.7, 'DubaiTitle');
+var parisCookies = new CountCookies('Paris', 20, 38, 2.3, 'ParisTitle');
+var limaCookies = new CountCookies('Lima', 23, 65, 6.3, 'LimaTitle');
+
+seattleCookies.calculateAllCookiesSales();
+seattleCookies.renderToPage();
+seattleCookies.totalCookieSales();
+tokyoCookies.calculateAllCookiesSales();
+tokyoCookies.renderToPage();
+tokyoCookies.totalCookieSales();
+dubaiCookies.calculateAllCookiesSales();
+dubaiCookies.renderToPage();
+dubaiCookies.totalCookieSales();
+parisCookies.renderToPage();
+parisCookies.totalCookieSales();
 limaCookies.calculateAllCookiesSales();
 limaCookies.renderToPage();
 limaCookies.totalCookieSales();
+
+
