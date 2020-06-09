@@ -1,4 +1,4 @@
-
+'use strict';
 var openHours = ['6AM', '7AM', '8AM', '9AM', '10AM', '11AM', '12PM', '1PM', '2PM', '3PM', '4PM', '5PM', '6PM', '7PM'];
 function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);
@@ -10,6 +10,13 @@ function arrSum(arr){
     return a + b;
   }, 0);
 }
+var totalCookieSales = function (){
+  var cookieTotal = arrSum(this.dailySales);
+  var totalCookieList = document.getElementById(this.name);
+  var totalCookieListItem = document.createElement('li');
+  totalCookieListItem.textContent = ('Total: ' + cookieTotal + ' cookies');
+  totalCookieList.appendChild(totalCookieListItem);
+};
 //=====================SEATTLE============================================
 var seattleCookies = {
   name : 'Seattle',
@@ -17,13 +24,7 @@ var seattleCookies = {
   maxMunCustomers : 65,
   averageNumCookies : 6.3,
   dailySales : [],
-  totalCookieSales : function(){
-    var cookieTotal = arrSum(this.dailySales);
-    var totalCookieList = document.getElementById('Seattle');
-    var totalCookieListItem = document.createElement('li');
-    totalCookieListItem.textContent = ('Total: ' + cookieTotal + ' cookies');
-    totalCookieList.appendChild(totalCookieListItem);
-  },
+  totalCookieSales : totalCookieSales,
   renderToPage : function(){
     var seattleListTitle = document.getElementById('SeattleTitle');
     var newListTitle = document.createElement('p');
@@ -48,6 +49,12 @@ seattleCookies.calculateAllCookiesSales();
 seattleCookies.renderToPage();
 seattleCookies.totalCookieSales();
 
+var x = {
+  name : 'Xavier',
+}
+function PersonNAme (firstName) {
+  this.name = firstName;
+}
 //========================================TOKYO=======================================
 var tokyoCookies = {
   name : 'Tokyo',
@@ -55,13 +62,7 @@ var tokyoCookies = {
   maxMunCustomers : 24,
   averageNumCookies : 1.2,
   dailySales : [],
-  totalCookieSales : function(){
-    var cookieTotal = arrSum(this.dailySales);
-    var totalCookieList = document.getElementById('Tokyo');
-    var totalCookieListItem = document.createElement('li');
-    totalCookieListItem.textContent = ('Total: ' + cookieTotal + ' cookies');
-    totalCookieList.appendChild(totalCookieListItem);
-  },
+  totalCookieSales : totalCookieSales,
   renderToPage : function(){
     var tokyoListTitle = document.getElementById('TokyoTitle');
     var newListTitle = document.createElement('p');
@@ -85,7 +86,6 @@ var tokyoCookies = {
 tokyoCookies.calculateAllCookiesSales();
 tokyoCookies.renderToPage();
 tokyoCookies.totalCookieSales();
-
 //================================DUBAI===============================================
 var dubaiCookies = {
   name : 'Dubai',
@@ -93,13 +93,7 @@ var dubaiCookies = {
   maxMunCustomers : 38,
   averageNumCookies : 3.7,
   dailySales : [],
-  totalCookieSales : function(){
-    var cookieTotal = arrSum(this.dailySales);
-    var totalCookieList = document.getElementById('Dubai');
-    var totalCookieListItem = document.createElement('li');
-    totalCookieListItem.textContent = ('Total: ' + cookieTotal + ' cookies');
-    totalCookieList.appendChild(totalCookieListItem);
-  },
+  totalCookieSales : totalCookieSales,
   renderToPage : function(){
     var dubaiListTitle = document.getElementById('DubaiTitle');
     var newListTitle = document.createElement('p');
@@ -132,13 +126,7 @@ var parisCookies = {
   maxMunCustomers : 38,
   averageNumCookies : 2.3,
   dailySales : [],
-  totalCookieSales : function(){
-    var cookieTotal = arrSum(this.dailySales);
-    var totalCookieList = document.getElementById('Paris');
-    var totalCookieListItem = document.createElement('li');
-    totalCookieListItem.textContent = ('Total: ' + cookieTotal + ' cookies');
-    totalCookieList.appendChild(totalCookieListItem);
-  },
+  totalCookieSales : totalCookieSales,
   renderToPage : function(){
     var parisListTitle = document.getElementById('ParisTitle');
     var newListTitle = document.createElement('p');
@@ -171,13 +159,7 @@ var limaCookies = {
   maxMunCustomers : 65,
   averageNumCookies : 6.3,
   dailySales : [],
-  totalCookieSales : function(){
-    var cookieTotal = arrSum(this.dailySales);
-    var totalCookieList = document.getElementById('lima');
-    var totalCookieListItem = document.createElement('li');
-    totalCookieListItem.textContent = ('Total: ' + cookieTotal + ' cookies');
-    totalCookieList.appendChild(totalCookieListItem);
-  },
+  totalCookieSales : totalCookieSales,
   renderToPage : function(){
     var limaListTitle = document.getElementById('LimaTitle');
     var newListTitle = document.createElement('p');
