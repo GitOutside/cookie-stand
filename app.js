@@ -47,7 +47,6 @@ var renderToPage = function(){
   newListTitle.textContent = this.name;
   seattleListTitle.appendChild(newListTitle);
   var seattleSalesByHour = document.getElementById(this.name);
-
   for (var i = 0; i < openHours.length; i++){
     var newListItem = document.createElement('li');
     newListItem.textContent = openHours[i] + ': ' + this.dailySales[i] + ' cookies';
@@ -63,6 +62,7 @@ function CountCookies(name, minNumCustomers, maxNumCustomers, averageNumCookies,
   this.averageNumCookies = averageNumCookies;
   this.dailySales = [];
   this.unorderedListTitle = unorderedListTitle;
+  this.storeDailyTotal = 0;
 }
 CountCookies.prototype.renderToPage = renderToPage;
 CountCookies.prototype.totalCookieSales = totalCookieSales;
@@ -96,8 +96,6 @@ function makeFooter(){
   footerRow.appendChild(footerCell);
   var totalHourlyAllStore = generateHourlyTotals();
   console.log(totalHourlyAllStore.length);
-  debugger;
-
   for(var i = 0; i < totalHourlyAllStore.length; i++){
     var newFootCell = document.createElement('th');
     newFootCell.textContent = totalHourlyAllStore[i];
@@ -112,16 +110,19 @@ function renderSalesInTable(){
   var table = document.getElementById('salesTable');
   var tableRow = document.createElement('tr');
   var tableCell = document.createElement('td');
-  tableRow.appendChild(tableCell);
   tableCell.textContent = this.name;
-  table.appendChild(tableRow);
+  tableRow.appendChild(tableCell);
   for (var i = 0; i < this.dailySales.length; i++){
     tableCell = document.createElement('td');
     tableCell.textContent = this.dailySales[i];
     tableRow.appendChild(tableCell);
-    table.appendChild(tableRow);
   }
+  var dailyTotals = document.createElement('th');
+  dailyTotals.textContent = arrSum(this.dailySales);
+  tableRow.appendChild(dailyTotals);
+  table.appendChild(tableRow);
 }
+
 //==========================NEW OBJECTS=================================
 var seattleCookies = new CountCookies('Seattle', 23, 65, 6.3, 'SeattleTitle');
 var tokyoCookies = new CountCookies('Tokyo', 3, 24, 1.2, 'TokyoTitle');
