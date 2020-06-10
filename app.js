@@ -26,6 +26,7 @@ var calculateAllCookiesSales = function (){
     this.dailySales.push(hourlySales);
   }
 };
+
 var renderToPage = function(){
   this.calculateAllCookiesSales();
   this.totalCookieSales();
@@ -40,7 +41,6 @@ var renderToPage = function(){
     seattleSalesByHour.appendChild(newListItem);
   }
 };
-
 //=============================CONSTRUCTOR FUNCTION======================
 function CountCookies(name, minNumCustomers, maxNumCustomers, averageNumCookies, unorderedListTitle) {
   this.name = name;
@@ -54,6 +54,21 @@ CountCookies.prototype.renderToPage = renderToPage;
 CountCookies.prototype.totalCookieSales = totalCookieSales;
 CountCookies.prototype.calculateAllCookiesSales = calculateAllCookiesSales;
 CountCookies.prototype.renderSalesInTable = renderSalesInTable;
+
+function makeHeadings(){
+  var table = document.getElementById('salesTable');
+  var headerRow = document.createElement('tr');
+  var headerCell = document.createElement('th');
+  headerCell.textContent = 'Store';
+  headerRow.appendChild(headerCell);
+  for(var i = 0; i < openHours.length; i++){
+    var newCell = document.createElement('th');
+    console.log('openHours', openHours[i]);
+    newCell.textContent = openHours[i];
+    headerRow.appendChild(newCell);
+  }
+  table.appendChild(headerRow);
+}
 
 function renderSalesInTable(){
   var table = document.getElementById('salesTable');
@@ -77,7 +92,7 @@ var dubaiCookies = new CountCookies('Dubai', 11, 38, 3.7, 'DubaiTitle');
 var parisCookies = new CountCookies('Paris', 20, 38, 2.3, 'ParisTitle');
 var limaCookies = new CountCookies('Lima', 23, 65, 6.3, 'LimaTitle');
 
-
+makeHeadings();
 seattleCookies.renderToPage();
 seattleCookies.renderSalesInTable();
 tokyoCookies.renderToPage();
@@ -88,3 +103,4 @@ parisCookies.renderToPage();
 parisCookies.renderSalesInTable();
 limaCookies.renderToPage();
 limaCookies.renderSalesInTable();
+
