@@ -90,7 +90,7 @@ var seattleCookies = new CountCookies('Seattle', 23, 65, 6.3, 'SeattleTitle');
 var tokyoCookies = new CountCookies('Tokyo', 3, 24, 1.2, 'TokyoTitle');
 var dubaiCookies = new CountCookies('Dubai', 11, 38, 3.7, 'DubaiTitle');
 var parisCookies = new CountCookies('Paris', 20, 38, 2.3, 'ParisTitle');
-var limaCookies = new CountCookies('Lima', 23, 65, 6.3, 'LimaTitle');
+var limaCookies = new CountCookies('Lima', 2, 16, 4.6, 'LimaTitle');
 
 makeHeadings();
 seattleCookies.renderToPage();
