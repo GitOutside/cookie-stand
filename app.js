@@ -83,7 +83,8 @@ function makeHeadings(){
   }
   table.appendChild(headerRow);
 var allHours = document.createElement('th');
-allHours.textContent = 'Daily Total'
+allHours.textContent = 'Daily Totals';
+headerRow.appendChild(allHours);
 
 }
 
@@ -91,7 +92,7 @@ function makeFooter(){
   var table = document.getElementById('salesTable');
   var footerRow = document.createElement('tr');
   var footerCell = document.createElement('th');
-  footerCell.textContent = 'HourlyTotals';
+  footerCell.textContent = 'Hourly Totals';
   footerRow.appendChild(footerCell);
   var totalHourlyAllStore = generateHourlyTotals();
   console.log(totalHourlyAllStore.length);
