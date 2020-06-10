@@ -82,9 +82,9 @@ function makeHeadings(){
     headerRow.appendChild(newCell);
   }
   table.appendChild(headerRow);
-var allHours = document.createElement('th');
-allHours.textContent = 'Daily Totals';
-headerRow.appendChild(allHours);
+  var allHours = document.createElement('th');
+  allHours.textContent = 'Daily Totals';
+  headerRow.appendChild(allHours);
 
 }
 
@@ -102,6 +102,10 @@ function makeFooter(){
     footerRow.appendChild(newFootCell);
     console.log(newFootCell);
   }
+  table.appendChild(footerRow);
+  var grandTotal = document.createElement('th');
+  grandTotal.textContent = arrSum(totalHourlyAllStore);
+  footerRow.appendChild(grandTotal);
   table.appendChild(footerRow);
 }
 
