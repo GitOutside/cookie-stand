@@ -7,22 +7,44 @@ body {
 
 #intro{
   width: 450px;
+  margin-left: auto;
+  margin-right: auto;
 }
 table { 
   border: solid #201d64 2px;
   border-collapse: collapse;
   margin: 10px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
+a:link{
+  text-decoration: underline;
+}
+
+a:hover {
+  color: black;
+}
 #img1 {
   display: block;
   margin: 0px auto;
+}
+
+ul {
+  list-style-type: none;
+  text-align: center;
+
+}
+img {
+  border: solid #201d64 2px;
 }
 td {
   border: solid #20164d 2px;
   padding: 5px;
 }
-
+#gallery li {
+  display: inline;
+}
 th {
   border: solid #20164d 2px;
   padding: 5px;
