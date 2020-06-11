@@ -26,7 +26,17 @@ var calculateAllCookiesSales = function (){
     this.dailySales.push(hourlySales);
   }
 };
-
+function generateHourlyTotals(){
+  var hourlyTotals = [];
+  for (var i = 0; i < openHours.length; i++){
+    var hourlyTotalSales = 0;
+    for (var j = 0; j < allStores.length; j++){
+      hourlyTotalSales += allStores[j].dailySales[i];
+    }
+    hourlyTotals.push(hourlyTotalSales);
+  }
+  return hourlyTotals;
+}
 var renderToPage = function(){
   this.calculateAllCookiesSales();
   this.totalCookieSales();
@@ -41,6 +51,7 @@ var renderToPage = function(){
     seattleSalesByHour.appendChild(newListItem);
   }
 };
+
 //=============================CONSTRUCTOR FUNCTION======================
 function CountCookies(name, minNumCustomers, maxNumCustomers, averageNumCookies, unorderedListTitle) {
   this.name = name;
@@ -49,12 +60,12 @@ function CountCookies(name, minNumCustomers, maxNumCustomers, averageNumCookies,
   this.averageNumCookies = averageNumCookies;
   this.dailySales = [];
   this.unorderedListTitle = unorderedListTitle;
+  this.storeDailyTotal = 0;
 }
 CountCookies.prototype.renderToPage = renderToPage;
 CountCookies.prototype.totalCookieSales = totalCookieSales;
 CountCookies.prototype.calculateAllCookiesSales = calculateAllCookiesSales;
 CountCookies.prototype.renderSalesInTable = renderSalesInTable;
-
 function makeHeadings(){
   var table = document.getElementById('salesTable');
   var headerRow = document.createElement('tr');
@@ -68,31 +79,62 @@ function makeHeadings(){
     headerRow.appendChild(newCell);
   }
   table.appendChild(headerRow);
+  var allHours = document.createElement('th');
+  allHours.textContent = 'Daily Totals';
+  headerRow.appendChild(allHours);
+
+}
+
+function makeFooter(){
+  var table = document.getElementById('salesTable');
+  var footerRow = document.createElement('tr');
+  var footerCell = document.createElement('th');
+  footerCell.textContent = 'Hourly Totals';
+  footerRow.appendChild(footerCell);
+  var totalHourlyAllStore = generateHourlyTotals();
+  console.log(totalHourlyAllStore.length);
+  for(var i = 0; i < totalHourlyAllStore.length; i++){
+    var newFootCell = document.createElement('th');
+    newFootCell.textContent = totalHourlyAllStore[i];
+    footerRow.appendChild(newFootCell);
+    console.log(newFootCell);
+  }
+  table.appendChild(footerRow);
+  var grandTotal = document.createElement('th');
+  grandTotal.textContent = arrSum(totalHourlyAllStore);
+  footerRow.appendChild(grandTotal);
+  table.appendChild(footerRow);
 }
 
 function renderSalesInTable(){
   var table = document.getElementById('salesTable');
   var tableRow = document.createElement('tr');
   var tableCell = document.createElement('td');
-  tableRow.appendChild(tableCell);
   tableCell.textContent = this.name;
-  table.appendChild(tableRow);
+  tableRow.appendChild(tableCell);
   for (var i = 0; i < this.dailySales.length; i++){
     tableCell = document.createElement('td');
     tableCell.textContent = this.dailySales[i];
     tableRow.appendChild(tableCell);
-    table.appendChild(tableRow);
   }
+  var dailyTotals = document.createElement('th');
+  dailyTotals.textContent = arrSum(this.dailySales);
+  tableRow.appendChild(dailyTotals);
+  table.appendChild(tableRow);
 }
-//==========================NEW OBJECTS=================================
 
+
+//==========================NEW OBJECTS=================================
 var seattleCookies = new CountCookies('Seattle', 23, 65, 6.3, 'SeattleTitle');
 var tokyoCookies = new CountCookies('Tokyo', 3, 24, 1.2, 'TokyoTitle');
 var dubaiCookies = new CountCookies('Dubai', 11, 38, 3.7, 'DubaiTitle');
 var parisCookies = new CountCookies('Paris', 20, 38, 2.3, 'ParisTitle');
 var limaCookies = new CountCookies('Lima', 2, 16, 4.6, 'LimaTitle');
+var allStores = [seattleCookies, tokyoCookies, dubaiCookies, parisCookies, limaCookies];
 
 makeHeadings();
+
+
 seattleCookies.renderToPage();
 seattleCookies.renderSalesInTable();
 tokyoCookies.renderToPage();
@@ -104,3 +146,4 @@ parisCookies.renderSalesInTable();
 limaCookies.renderToPage();
 limaCookies.renderSalesInTable();
 
+makeFooter();
