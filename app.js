@@ -27,11 +27,9 @@ var calculateAllCookiesSales = function (){
   }
 };
 function generateHourlyTotals(){
-  //cycles through every hour
   var hourlyTotals = [];
   for (var i = 0; i < openHours.length; i++){
     var hourlyTotalSales = 0;
-    //cycles through every store
     for (var j = 0; j < allStores.length; j++){
       hourlyTotalSales += allStores[j].dailySales[i];
     }
@@ -68,7 +66,6 @@ CountCookies.prototype.renderToPage = renderToPage;
 CountCookies.prototype.totalCookieSales = totalCookieSales;
 CountCookies.prototype.calculateAllCookiesSales = calculateAllCookiesSales;
 CountCookies.prototype.renderSalesInTable = renderSalesInTable;
-
 function makeHeadings(){
   var table = document.getElementById('salesTable');
   var headerRow = document.createElement('tr');
@@ -109,7 +106,6 @@ function makeFooter(){
   table.appendChild(footerRow);
 }
 
-
 function renderSalesInTable(){
   var table = document.getElementById('salesTable');
   var tableRow = document.createElement('tr');
@@ -126,6 +122,7 @@ function renderSalesInTable(){
   tableRow.appendChild(dailyTotals);
   table.appendChild(tableRow);
 }
+
 
 //==========================NEW OBJECTS=================================
 var seattleCookies = new CountCookies('Seattle', 23, 65, 6.3, 'SeattleTitle');
