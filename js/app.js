@@ -1,5 +1,35 @@
 'use strict';
 
+var storeIntakeForm = document.getElementById('intakeForm');//form on sales pages targeted
+
+storeIntakeForm.addEventListener('submit', dealWithForm);
+//listening for submit in that form
+function dealWithForm(newStoreEvent){
+  newStoreEvent.preventDefault();
+  var location = newStoreEvent.target.name.value;
+  var min = newStoreEvent.target.minNumCustomers.value;
+  var max = newStoreEvent.target.maxNumCustomers.value;
+  var avg = newStoreEvent.target.averageNumCookies.value;
+  var newStore = new CountCookies(location, min, max, avg);
+  newStore.calculateAllCookiesSales();
+  newStore.renderSalesInTable();
+  //newStore.renderToPage();
+}
+
+//var inputName = storeIntakeForm.name;
+//var inputMinNum = storeIntakeForm.minNumCustomers;
+//var inputMaxNum = storeIntakeForm.maxNumCustomers;
+//var inputAvNum = storeIntakeForm.averageNumCookies;
+
+
+
+//get user input---DONE
+//make new object store
+//populate table
+
+
+
+//====================================================================
 var openHours = ['6AM', '7AM', '8AM', '9AM', '10AM', '11AM', '12PM', '1PM', '2PM', '3PM', '4PM', '5PM', '6PM', '7PM'];
 
 function getRandomIntInclusive(min, max) {
@@ -12,6 +42,9 @@ function arrSum(arr){
     return a + b;
   }, 0);
 }
+
+var listStores = [];
+
 var totalCookieSales = function (){
   var cookieTotal = arrSum(this.dailySales);
   var totalCookieList = document.getElementById(this.name);
@@ -40,15 +73,15 @@ function generateHourlyTotals(){
 var renderToPage = function(){
   this.calculateAllCookiesSales();
   this.totalCookieSales();
-  var seattleListTitle = document.getElementById(this.unorderedListTitle);
+  var storeListTitle = document.getElementById(this.unorderedListTitle);
   var newListTitle = document.createElement('p');
   newListTitle.textContent = this.name;
-  seattleListTitle.appendChild(newListTitle);
-  var seattleSalesByHour = document.getElementById(this.name);
+  storeListTitle.appendChild(newListTitle);
+  var storeSalesByHour = document.getElementById(this.name);
   for (var i = 0; i < openHours.length; i++){
     var newListItem = document.createElement('li');
     newListItem.textContent = openHours[i] + ': ' + this.dailySales[i] + ' cookies';
-    seattleSalesByHour.appendChild(newListItem);
+    storeSalesByHour.appendChild(newListItem);
   }
 };
 
@@ -61,6 +94,7 @@ function CountCookies(name, minNumCustomers, maxNumCustomers, averageNumCookies,
   this.dailySales = [];
   this.unorderedListTitle = unorderedListTitle;
   this.storeDailyTotal = 0;
+  listStores.push(this);
 }
 CountCookies.prototype.renderToPage = renderToPage;
 CountCookies.prototype.totalCookieSales = totalCookieSales;
@@ -123,7 +157,12 @@ function renderSalesInTable(){
   table.appendChild(tableRow);
 }
 
-
+function doIt(){
+  for (var i = 0; i < listStores.length; i++){
+    listStores[i].renderToPage();
+    listStores[i].renderSalesInTable();
+  }
+}
 //==========================NEW OBJECTS=================================
 var seattleCookies = new CountCookies('Seattle', 23, 65, 6.3, 'SeattleTitle');
 var tokyoCookies = new CountCookies('Tokyo', 3, 24, 1.2, 'TokyoTitle');
@@ -133,17 +172,5 @@ var limaCookies = new CountCookies('Lima', 2, 16, 4.6, 'LimaTitle');
 var allStores = [seattleCookies, tokyoCookies, dubaiCookies, parisCookies, limaCookies];
 
 makeHeadings();
-
-
-seattleCookies.renderToPage();
-seattleCookies.renderSalesInTable();
-tokyoCookies.renderToPage();
-tokyoCookies.renderSalesInTable();
-dubaiCookies.renderToPage();
-dubaiCookies.renderSalesInTable();
-parisCookies.renderToPage();
-parisCookies.renderSalesInTable();
-limaCookies.renderToPage();
-limaCookies.renderSalesInTable();
-
+doIt();
 makeFooter();
