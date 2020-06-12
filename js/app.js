@@ -1,4 +1,5 @@
 'use strict';
+
 var storeIntakeForm = document.getElementById('intakeForm');//form on sales pages targeted
 
 storeIntakeForm.addEventListener('submit', dealWithForm);
@@ -11,9 +12,8 @@ function dealWithForm(newStoreEvent){
   var avg = newStoreEvent.target.averageNumCookies.value;
   var newStore = new CountCookies(location, min, max, avg);
   newStore.calculateAllCookiesSales();
-  //newStore.renderToPage();
   newStore.renderSalesInTable();
-  
+  //newStore.renderToPage();
 }
 
 //var inputName = storeIntakeForm.name;
@@ -173,17 +173,4 @@ var allStores = [seattleCookies, tokyoCookies, dubaiCookies, parisCookies, limaC
 
 makeHeadings();
 doIt();
-
-
-//seattleCookies.renderToPage();
-// seattleCookies.renderSalesInTable();
-// tokyoCookies.renderToPage();
-// tokyoCookies.renderSalesInTable();
-// dubaiCookies.renderToPage();
-// dubaiCookies.renderSalesInTable();
-// parisCookies.renderToPage();
-// parisCookies.renderSalesInTable();
-// limaCookies.renderToPage();
-// limaCookies.renderSalesInTable();
-
 makeFooter();
