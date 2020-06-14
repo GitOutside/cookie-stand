@@ -8,8 +8,11 @@ body {
   font-family: Georgia, 'Times New Roman', Times, serif;
   text-align: center;
 }
-
-
+#merch { 
+  font-family: 'Bellota', cursive;
+  color: #7CFC00;
+  margin: 0px auto;
+}
 table { 
   border: solid #201d64 2px;
   border-collapse: collapse;
@@ -22,6 +25,8 @@ table {
 }
 label {
   display: list-item;
+  list-style-type: none;
+
 }
 a:link{
   text-decoration: underline;
@@ -46,18 +51,12 @@ li {
   margin: 25px;
 }
 
-img {
-  border: solid #201d64 2px; 
-}
 
 td {
   border: solid #20164d 2px;
   padding: 5px;
 }
-figure {
-  float: left;
-  margin-left: 150px;
-}
+
 
 th {
   border: solid #20164d 2px;
@@ -69,4 +68,15 @@ h1 {
 }
 footer {
   clear: left;
+ padding: 20px;
+}
+#intakeForm{
+  background-color: blanchedalmond;
+  width: 450px;
+  margin: auto;
+  padding-top: 10px;
+  padding-bottom: 5px;
+}
+fieldset{
+  border: none;
 }
