@@ -8,41 +8,31 @@
 </head>
 <body>
   <a id="home-page" href="index.html">Home</a>
-  <h2>Hourly Cookie Sales for All Locations</h2>
-  <table id="salesTable"></table>
   
   <h1>New Location Intake</h1>
   <form id="intakeForm">
     <fieldset>
-    <legend>New Store Intake Form</legend>
-
-    <label for="name">Store location</label>
-    <input type="text" name="name">
-
-    <label for="minNumCustomers">Minimum number of customers per hour</label>
-    <input type="text" name="minNumCustomers">
-
-    <label for="maxNumCustomers">Maximun number of customers per hour</label>
-    <input type="text" name="maxNumCustomers">
-
-    <label for="averageNumCookies">Average amount of cookies sold per transaction</label>
-    <input type="text" name="averageNumCookies">
-
-    <button>submit</button>
-  </fieldset>
+      <legend>New Store Intake Form</legend>
+      
+      <label for="name">Store location</label>
+      <input type="text" name="name">
+      
+      <label for="minNumCustomers">Minimum number of customers per hour</label>
+      <input type="number" name="minNumCustomers">
+      
+      <label for="maxNumCustomers">Maximun number of customers per hour</label>
+      <input type="number" name="maxNumCustomers">
+      
+      <label for="averageNumCookies">Average amount of cookies sold per transaction</label>
+      <input type="number" name="averageNumCookies" step="0.01">
+      
+      <button>submit</button>
+    </fieldset>
   </form>
+  <h2>Hourly Cookie Sales for All Locations</h2>
+  <table id="salesTable"></table>
 
-  <div id="SeattleTitle"></div>
-  <ul id="Seattle">
-  </ul><div id="TokyoTitle"></div>
-  <ul id="Tokyo">
-  </ul><div id="DubaiTitle"></div>
-  <ul id="Dubai">
-  </ul><div id="ParisTitle"></div>
-  <ul id="Paris">
-  </ul><div id="LimaTitle"></div>
-  <ul id="Lima">
-  </ul>
+  
   <script src="js/app.js"></script>
 </body>
 
