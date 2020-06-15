@@ -1,22 +1,22 @@
 'use strict';
 
+var openHours = ['6AM', '7AM', '8AM', '9AM', '10AM', '11AM', '12PM', '1PM', '2PM', '3PM', '4PM', '5PM', '6PM', '7PM'];
 var storeIntakeForm = document.getElementById('intakeForm');
 var allStores = [];
+var table = document.getElementById('salesTable');
 
 storeIntakeForm.addEventListener('submit', dealWithForm);
-
 function dealWithForm(newStoreEvent){
   newStoreEvent.preventDefault();
   var name = newStoreEvent.target.name.value;
-  var min = newStoreEvent.target.minNumCustomers.value;
-  var max = newStoreEvent.target.maxNumCustomers.value;
-  var avg = newStoreEvent.target.averageNumCookies.value;
+  var min = parseInt(newStoreEvent.target.minNumCustomers.value);
+  var max = parseInt(newStoreEvent.target.maxNumCustomers.value);
+  var avg = parseFloat(newStoreEvent.target.averageNumCookies.value);
   var newStore = new CountCookies(name, min, max, avg);
   allStores.push(newStore);
-  newStore.calculateAllCookiesSales();
-  newStore.totalCookieSales();
-  //newStore.generateHourlyTotals();
+  document.getElementById('salesTable').deleteRow(-1);
   newStore.renderSalesInTable();
+  makeFooter();
 }
 
 function generateHourlyTotals(){//for footer
@@ -31,17 +31,13 @@ function generateHourlyTotals(){//for footer
   return hourlyTotals;
 }
 
-
-//====================================================================
-var openHours = ['6AM', '7AM', '8AM', '9AM', '10AM', '11AM', '12PM', '1PM', '2PM', '3PM', '4PM', '5PM', '6PM', '7PM'];
-
 //This function is from: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-//This function was provided to me by my classmate, Chandler Puckett
+//This function was provided to me by my classmate, Chandler Puckett. It sums the values in an array
 function arrSum(arr){
   return arr.reduce(function(a,b){
     return a + b;
@@ -51,13 +47,17 @@ function arrSum(arr){
 var totalCookieSales = function (){
   arrSum(this.dailySales);
 };
-var calculateAllCookiesSales = function (){//Hourly sales for a store
+
+
+var calcHourly = function (){//Hourly sales for a store
   for (var i = 0; i < openHours.length; i++){
     var randomNumber =  getRandomIntInclusive(this.minNumCustomers, this.maxNumCustomers);
     var hourlySales = Math.round(randomNumber * this.averageNumCookies);
     this.dailySales.push(hourlySales);
   }
 };
+
+
 function renderSalesInTable(){
   var table = document.getElementById('salesTable');
   var tableRow = document.createElement('tr');
@@ -94,7 +94,6 @@ function makeFooter(){
   footerRow.appendChild(grandTotal);
   table.appendChild(footerRow);
 }
-var table = document.getElementById('salesTable');
 //=============================CONSTRUCTOR FUNCTION======================
 function CountCookies(name, minNumCustomers, maxNumCustomers, averageNumCookies) {
   this.name = name;
@@ -102,11 +101,11 @@ function CountCookies(name, minNumCustomers, maxNumCustomers, averageNumCookies)
   this.maxNumCustomers = maxNumCustomers;
   this.averageNumCookies = averageNumCookies;
   this.dailySales = [];
-  this.calculateAllCookiesSales();
+  this.calcHourly();
   this.totalCookieSales();
 }
 CountCookies.prototype.totalCookieSales = totalCookieSales;
-CountCookies.prototype.calculateAllCookiesSales = calculateAllCookiesSales;
+CountCookies.prototype.calcHourly = calcHourly;
 CountCookies.prototype.renderSalesInTable = renderSalesInTable;
 CountCookies.prototype.doIt = doIt;
 
@@ -118,7 +117,6 @@ function makeHeadings(){
   headerRow.appendChild(headerCell);
   for(var i = 0; i < openHours.length; i++){
     var newCell = document.createElement('th');
-    console.log('openHours', openHours[i]);
     newCell.textContent = openHours[i];
     headerRow.appendChild(newCell);
   }
@@ -140,14 +138,13 @@ var tokyoCookies = new CountCookies('Tokyo', 3, 24, 1.2);
 var dubaiCookies = new CountCookies('Dubai', 11, 38, 3.7);
 var parisCookies = new CountCookies('Paris', 20, 38, 2.3);
 var limaCookies = new CountCookies('Lima', 2, 16, 4.6);
-//allStores = [seattleCookies, tokyoCookies, dubaiCookies, parisCookies, limaCookies];
+
 allStores.push(seattleCookies);
 allStores.push(tokyoCookies);
 allStores.push(dubaiCookies);
 allStores.push(parisCookies);
 allStores.push(limaCookies);
-makeHeadings();
 
+makeHeadings();
 doIt();
 makeFooter();
-
